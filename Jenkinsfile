@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     enviroment{
-        NETLIFY_SITE_ID 'd13accd6-ef29-4757-a3f1-06cde5e197b8'
+        NETLIFY_SITE_ID '197fc7f6-0a5d-4a42-a44a-d4ebc3d34c89'
         NETLIFY_AUTH_TOKEN credential(jenkins-token)
     }
 
