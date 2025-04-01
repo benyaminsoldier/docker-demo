@@ -1,10 +1,10 @@
 pipeline {
     agent any
-/*
+
     enviroment{
         NETLIFY_SITE_ID 'd13accd6-ef29-4757-a3f1-06cde5e197b8'
-        NETLIFY_AUTH_TOKEN 'nfp_dEpCDWDTdSqmC6X4ngmGZWGhDZsqPAQHc888'
-    }*/
+        NETLIFY_AUTH_TOKEN credential(jenkins-token)
+    }
 
     stages {
         stage('Build') {
@@ -47,7 +47,7 @@ pipeline {
                 '''  
             }
         }
-        /*
+        
         stage('Deploy') {
             agent{
                 docker{
@@ -64,6 +64,6 @@ pipeline {
                     node_modules/.bin/netlify deploy --prod --dir=build
                 '''  
             }
-        }*/
+        }
     }
 }
