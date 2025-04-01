@@ -35,10 +35,12 @@ pipeline {
             steps {
                 sh '''
                     test -f build/index.html
+                    grep -R "Morgan Tudor" . || (echo "ERROR: Name not found!" && exit 1)
                     npm test
                 '''  
             }
         }
+        /*
         stage('Deploy') {
             agent{
                 docker{
@@ -55,6 +57,6 @@ pipeline {
                     node_modules/.bin/netlify deploy --prod --dir=build
                 '''  
             }
-        }
+        }*/
     }
 }
