@@ -35,7 +35,7 @@ pipeline {
             steps {
                 sh '''
                     test -f build/index.html
-                    grep -R "Morgan Tudor" . || (echo "ERROR: Name not found!" && exit 1)
+                    grep -R "Daniel Benjumea" . --exclude=Jenkinsfile || (echo "ERROR: Name not found!" && exit 1)
                     npm test
                 '''  
             }
