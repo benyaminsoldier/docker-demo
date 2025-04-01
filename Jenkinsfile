@@ -37,11 +37,11 @@ pipeline {
                     test -f build/index.html
                     # grep -R "Daniel Benjumea" . --exclude=Jenkinsfile || (echo "ERROR: Name not found!" && exit 1)
                     npm test
-                    # Check if "Morgan Tudor" is in the source code
-                    if grep -riq "Morgan Tudor" src/; then
-                        echo "Morgan Tudor found in the source code."
+                    # Check if "Daniel Benjumea" is in the source code
+                    if grep -riq "Daniel Benjumea" src/; then
+                        echo "Daniel Benjumea found in the source code."
                     else
-                        echo "ERROR: Morgan Tudor not found!" >&2
+                        echo "ERROR: Daniel Benjumea not found!" >&2
                         exit 1
                     fi
                 '''  
