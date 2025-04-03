@@ -6,7 +6,7 @@ pipeline {
     //     NETLIFY_AUTH_TOKEN = credentials('jenkins-token')
     // }
 
-    // stages {
+     stages {
     //     stage('Build') {
     //         agent{
     //             docker{
@@ -27,7 +27,7 @@ pipeline {
     //     }
     // }
 
-    stages{
+   
         stage('Deploy'){
             agent{
                 docker{
@@ -47,7 +47,7 @@ pipeline {
                 }
             }
         }
-    }
+    
 
         // stage('Test') {
         //     agent{
@@ -89,5 +89,6 @@ pipeline {
         //         '''  
         //     }
         // }
+     }
     
 }
