@@ -61,7 +61,7 @@ pipeline {
             }
 
             environment{
-                AWS_S3_BUCKET 'demo250403'
+                AWS_S3_BUCKET = 'demo250403'
             }
 
              steps {
