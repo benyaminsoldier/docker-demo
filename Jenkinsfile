@@ -40,7 +40,7 @@ pipeline {
              steps {
                 withCredentials([usernamePassword(credentialsId: 'demo-credentials', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
                     sh '''
-                            aws --versiom
+                            aws --version
                             aws s3 ls
 
                         '''
