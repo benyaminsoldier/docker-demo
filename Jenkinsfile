@@ -7,25 +7,48 @@ pipeline {
     // }
 
      stages {
-    //     stage('Build') {
-    //         agent{
-    //             docker{
-    //                 image 'node:22.14.0-alpine'
-    //                 reuseNode true
-    //             }
-    //         }
-    //         steps {
-    //             sh '''
-    //                 ls -la
-    //                 node --version
-    //                 npm --version
-    //                 npm install
-    //                 npm run build
-    //                 ls -la
-    //             '''  
-    //         }
-    //     }
-    // }
+            stage('Build') {
+                agent{
+                    docker{
+                        image 'node:22.14.0-alpine'
+                        reuseNode true
+                    }
+                }
+                steps {
+                    sh '''
+                        ls -la
+                        node --version
+                        npm --version
+                        npm install
+                        npm run build
+                        ls -la
+                    '''  
+                }
+            }
+        }
+        stage('Test') {
+            agent{
+                docker{
+                    image 'node:22.14.0-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                    test -f build/index.html
+                    # grep -R "Daniel Benjumea" . --exclude=Jenkinsfile || (echo "ERROR: Name not found!" && exit 1)
+                    npm test
+                    # Check if "Daniel Benjumea" is in the source code
+                    if grep -riq "Daniel Benjumea" src/; then
+                        echo "Daniel Benjumea found in the source code."
+                    else
+                        echo "ERROR: Daniel Benjumea not found!" >&2
+                        exit 1
+                    fi
+                '''  
+            }
+        }
+            
 
    
         stage('Deploy'){
@@ -42,8 +65,9 @@ pipeline {
                     sh '''
                             aws --version
                             aws s3 ls
-                            echo "hello S3!" > index.html
-                            aws s3 cp index.html s3://demo250403/index.html
+                            
+                            # echo "hello S3!" > index.html
+                            # aws s3 cp index.html s3://demo250403/index.html
 
                         '''
                 }
@@ -51,27 +75,7 @@ pipeline {
         }
     
 
-        // stage('Test') {
-        //     agent{
-        //         docker{
-        //             image 'node:22.14.0-alpine'
-        //             reuseNode true
-        //         }
-        //     }
-        //     steps {
-        //         sh '''
-        //             test -f build/index.html
-        //             # grep -R "Daniel Benjumea" . --exclude=Jenkinsfile || (echo "ERROR: Name not found!" && exit 1)
-        //             npm test
-        //             # Check if "Daniel Benjumea" is in the source code
-        //             if grep -riq "Daniel Benjumea" src/; then
-        //                 echo "Daniel Benjumea found in the source code."
-        //             else
-        //                 echo "ERROR: Daniel Benjumea not found!" >&2
-        //                 exit 1
-        //             fi
-        //         '''  
-        //     }
+
         // }
         
         // stage('Deploy') {
@@ -91,6 +95,6 @@ pipeline {
         //         '''  
         //     }
         // }
-     }
+     
     
 }
