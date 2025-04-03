@@ -27,7 +27,7 @@ pipeline {
     //     }
     // }
 
-        stage('deploy-aws-s3'){
+        stages('deploy-aws-s3'){
 
             docker{
                 image 'amazon/aws-cli'
