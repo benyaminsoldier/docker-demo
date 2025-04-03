@@ -28,11 +28,12 @@ pipeline {
     // }
 
         stages('deploy-aws-s3'){
-
-            docker{
-                image 'amazon/aws-cli'
-                reuseNode true
-                args '--entrypoint=""'
+            agent{
+                docker{
+                    image 'amazon/aws-cli'
+                    reuseNode true
+                    args '--entrypoint=""'
+                }
             }
 
              steps {
