@@ -61,7 +61,7 @@ pipeline {
             }
 
             environment{
-                AWS_S3_BUCKET "demo2500403"
+                AWS_S3_BUCKET "demo250403"
             }
 
              steps {
@@ -70,7 +70,7 @@ pipeline {
                             aws --version
                             aws s3 ls
                             aws s3 sync build s3://AWS_S3_BUCKET
-                            
+
                             # echo "hello S3!" > index.html
                             # aws s3 cp index.html s3://demo250403/index.html
 
