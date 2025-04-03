@@ -42,6 +42,8 @@ pipeline {
                     sh '''
                             aws --version
                             aws s3 ls
+                            echo "hello S3!" > index.html
+                            aws s3 cp index.html s3://demo250403/index.html
 
                         '''
                 }
