@@ -27,7 +27,8 @@ pipeline {
     //     }
     // }
 
-        stages('deploy-aws-s3'){
+    stages{
+        stage('Deploy'){
             agent{
                 docker{
                     image 'amazon/aws-cli'
@@ -46,6 +47,7 @@ pipeline {
                 }
             }
         }
+    }
 
         // stage('Test') {
         //     agent{
