@@ -1,30 +1,31 @@
 pipeline {
     agent any
 
-    environment{
-        NETLIFY_SITE_ID  = '197fc7f6-0a5d-4a42-a44a-d4ebc3d34c89'
-        NETLIFY_AUTH_TOKEN = credentials('jenkins-token')
-    }
+    // environment{
+    //     NETLIFY_SITE_ID  = '197fc7f6-0a5d-4a42-a44a-d4ebc3d34c89'
+    //     NETLIFY_AUTH_TOKEN = credentials('jenkins-token')
+    // }
 
-    stages {
-        stage('Build') {
-            agent{
-                docker{
-                    image 'node:22.14.0-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh '''
-                    ls -la
-                    node --version
-                    npm --version
-                    npm install
-                    npm run build
-                    ls -la
-                '''  
-            }
-        }
+    // stages {
+    //     stage('Build') {
+    //         agent{
+    //             docker{
+    //                 image 'node:22.14.0-alpine'
+    //                 reuseNode true
+    //             }
+    //         }
+    //         steps {
+    //             sh '''
+    //                 ls -la
+    //                 node --version
+    //                 npm --version
+    //                 npm install
+    //                 npm run build
+    //                 ls -la
+    //             '''  
+    //         }
+    //     }
+    // }
 
         stage('deploy-aws-s3'){
 
@@ -36,14 +37,13 @@ pipeline {
 
              steps {
                 withCredentials([usernamePassword(credentialsId: 'demo-credentials', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
+                    sh '''
+                            aws --versiom
+                            aws s3 ls
 
-               sh '''
-                    aws --versiom
-                    aws s3 ls
-
-                '''
+                        '''
+                }
             }
-
         }
 
         // stage('Test') {
@@ -86,5 +86,5 @@ pipeline {
         //         '''  
         //     }
         // }
-    }
+    
 }
